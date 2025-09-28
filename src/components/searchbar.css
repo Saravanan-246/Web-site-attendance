@@ -1,0 +1,110 @@
+/* src/components/searchbar.css */
+
+/* Wrapper */
+.form {
+  --timing: 0.3s;
+  --width-of-input: 280px;
+  --height-of-input: 48px;
+  --border-height: 2px;
+  --border-color: #3b82f6; /* Tailwind blue-500 */
+  --border-radius: 12px;
+  --after-border-radius: 8px;
+
+  position: relative;
+  width: var(--width-of-input);
+  height: var(--height-of-input);
+  display: flex;
+  align-items: center;
+  padding-inline: 1em;
+  border-radius: var(--border-radius);
+  background: #ffffff; /* Always white */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: border-radius var(--timing) ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Input text */
+.input {
+  font-size: 1rem;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  color: #333; /* Text color for readability */
+}
+
+/* Blue animated underline */
+.form:before {
+  content: "";
+  position: absolute;
+  background: var(--border-color);
+  transform: scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: var(--border-height);
+  left: 0;
+  bottom: 0;
+  border-radius: 1px;
+  transition: transform var(--timing) ease;
+}
+
+.form:focus-within {
+  border-radius: var(--after-border-radius);
+  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.15);
+}
+
+input:focus {
+  outline: none;
+}
+
+.form:focus-within:before {
+  transform: scale(1);
+}
+
+/* Reset (Clear) button */
+.reset {
+  border: none;
+  background: none;
+  opacity: 0;
+  visibility: hidden;
+  color: #555;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+input:not(:placeholder-shown) ~ .reset {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Icon size */
+.form svg {
+  width: 20px;
+  margin-top: 2px;
+  color: #555;
+}
+
+/* DARK MODE adjustments */
+@media (prefers-color-scheme: dark) {
+  .form {
+    background: #ffffff; /* Keep search bar white even in dark mode */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .input {
+    color: #111; /* Darker text for readability */
+  }
+
+  .reset {
+    color: #666;
+  }
+
+  .form svg {
+    color: #666;
+  }
+
+  .form:focus-within {
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.25);
+  }
+}
